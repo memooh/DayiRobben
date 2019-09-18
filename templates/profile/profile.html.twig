@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Invoice index{% endblock %}
+
+{% block body %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Orderdate</th>
+            <th>Paid</th>
+            <th>Paid_date</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for invoice in invoice %}
+            <tr>
+                <td>{{ invoice.id }}</td>
+                <td>{{ invoice.orderdate ? invoice.orderdate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ invoice.paid ? 'Yes' : 'No' }}</td>
+                <td>{{ invoice.paidDate ? invoice.paidDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

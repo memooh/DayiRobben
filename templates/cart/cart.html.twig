@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DefaultController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="container">
+    <h1>Products</h1>
+
+    <hr>
+
+    <div class="container">
+        <table class="table table-sm">
+            <thead>
+            <tr>
+                <th scope="col">Product name</th>
+                <th scope="col">Product Price</th>
+                <th scope="col">Product Amount</th>
+                <th scope="col">Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% set totalcart = 0 %}
+            {% for array in cart %}
+                <tr>
+                    <td> {{ array.name }} </td>
+                    <td> {{ array.price }} </td>
+                    <td> {{ array.aantal }} </td>
+                    <td> {{ array.aantal * array.price }}</td>
+                    {% set totalcart = totalcart + (array.aantal * array.price)  %}
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">no records found</td>
+                </tr>
+            {% endfor %}
+            <td>Total €{{ totalcart }} </td>
+            <td>
+                <a href="{{ path('checkout')}}">Checkout</a>
+            </td>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
