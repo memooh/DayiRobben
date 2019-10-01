@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Image;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
@@ -20,8 +21,11 @@ class ProductController extends AbstractController
      */
     public function index(ProductRepository $productRepository): Response
     {
+        $image = $this->getDoctrine()->getRepository(Image::class)->findall();
+
         return $this->render('product/index.html.twig', [
             'products' => $productRepository->findAll(),
+            'image' => $image,
         ]);
     }
 

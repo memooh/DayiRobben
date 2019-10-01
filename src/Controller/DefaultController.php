@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Image;
 use App\Entity\Invorder;
 use App\Entity\Product;
 use App\Entity\User;
@@ -28,11 +29,13 @@ class DefaultController extends AbstractController
      */
     public function index()
     {
-
+        $image = $this->getDoctrine()->getRepository(Image::class)->findall();
         $products = $this->getDoctrine()->getRepository(Product::class)->findall();
+
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
             'products' => $products,
+            'image' => $image,
         ]);
     }
 

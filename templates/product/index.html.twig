@@ -9,7 +9,8 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
+                <th>Njjjame</th>
+                <th>Image</th>
                 <th>Description</th>
                 <th>Price</th>
                 <th>Code</th>
@@ -21,6 +22,9 @@
             <tr>
                 <td>{{ product.id }}</td>
                 <td>{{ product.name }}</td>
+                {% for productImage in product %}
+                    <td><img src="{{ vich_uploader_asset(image, 'imageFile')}}" style="width:125px;height:125px;"></td>
+                {% endfor %}
                 <td>{{ product.description }}</td>
                 <td>{{ product.price }}</td>
                 <td>{{ product.code }}</td>

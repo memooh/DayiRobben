@@ -3,9 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
+ * @Vich\Uploadable
  */
 class Product
 {
@@ -45,6 +50,12 @@ class Product
      * @ORM\ManyToOne(targetEntity="App\Entity\Tax")
      */
     private $tax;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Image", inversedBy="imageproducts")
+     */
+    private $image;
+
 
     public function getId(): ?int
     {
@@ -126,4 +137,22 @@ class Product
     public function __toString() {
         return (string) $this->getCat();
     }
+
+    public function getImage(): ?image
+    {
+        return $this->image;
+    }
+
+    public function setImage(?image $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function __construct()
+    {
+        $this->image = new ArrayCollection();
+    }
+
 }
